@@ -1,0 +1,17 @@
+{% extends 'library/base.html' %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2 class="mb-0">RB Tree Color Flips</h2>
+    </div>
+    <div class="card-body">
+        <h3>Total Color Flips: {{ count }}</h3>
+        <p class="text-muted">This counts the number of color changes made to maintain Red-Black tree properties during insertions and deletions.</p>
+        
+        <div class="mt-4">
+            <a href="{% url 'book_list' %}" class="btn btn-primary">Back to Books</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

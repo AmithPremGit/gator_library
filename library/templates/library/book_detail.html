@@ -1,0 +1,75 @@
+{% extends 'library/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="mb-0">{{ book.title }}</h2>
+            </div>
+            <div class="card-body">
+                <div class="mb-4">
+                    <h5 class="card-title">Book Details</h5>
+                    <p><strong>Book ID:</strong> {{ book.book_id }}</p>
+                    <p><strong>Author:</strong> {{ book.author }}</p>
+                    <p><strong>Status:</strong> 
+                        {% if book.availability_status == "Yes" %}
+                            <span class="badge bg-success">Available</span>
+                        {% else %}
+                            <span class="badge bg-danger">Borrowed by {{ book.borrowed_by.username }}</span>
+                        {% endif %}
+                    </p>
+                </div>
+
+                <div class="mb-4">
+                    <h5>Actions</h5>
+                    {% if book.availability_status == "Yes" %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="borrow">
+                            <button type="submit" class="btn btn-primary">Borrow Book</button>
+                        </form>
+                    {% elif book.borrowed_by == user %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="return">
+                            <button type="submit" class="btn btn-warning">Return Book</button>
+                        </form>
+                    {% else %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="reserve">
+                            {{ form|crispy }}
+                            <button type="submit" class="btn btn-info">Reserve Book</button>
+                        </form>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        {% if reservations %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Current Reservations</h5>
+                </div>
+                <div class="card-body">
+                    <div class="list-group">
+                        {% for reservation in reservations %}
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-1">{{ reservation.patron.username }}</h6>
+                                    <small>Priority: {{ reservation.get_priority_display }}</small>
+                                </div>
+                                <small class="text-muted">
+                                    Reserved on: {{ reservation.reservation_time|date:"M d, Y H:i" }}
+                                </small>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
