@@ -1,6 +1,6 @@
 # Gator Library Management System
 
-A sophisticated library management system built with Django, implementing a Red-Black Tree data structure for efficient book management and a Min Heap for handling book reservations.
+A library management system built with Django, implementing a Red-Black Tree data structure for efficient book management and a Min Heap for handling book reservations.
 
 ## Features
 
@@ -110,6 +110,7 @@ python manage.py runserver
 
 ## Project Structure
 
+```
 gator_library/                  # Root Directory
 ├── manage.py
 ├── gator_library/             # Project Configuration
@@ -142,6 +143,7 @@ gator_library/                  # Root Directory
     ├── signals.py
     ├── urls.py
     └── views.py
+```
 
 ## Testing
 
@@ -155,4 +157,3 @@ Tests cover:
 - Red-Black Tree operations
 - Reservation system functionality
 - Edge cases and boundary conditions
-- Concurrent operations
