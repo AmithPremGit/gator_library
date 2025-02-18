@@ -110,18 +110,38 @@ python manage.py runserver
 
 ## Project Structure
 
-```
-gator_library/
-├── library/                  # Main app directory
-│   ├── data_structures/     # Custom data structure implementations
-│   │   ├── rb_tree.py      # Red-Black Tree implementation
-│   │   └── min_heap.py     # Min Heap implementation
-│   ├── models.py           # Database models
-│   ├── views.py            # View controllers
-│   └── templates/         # HTML templates
+gator_library/                  # Root Directory
 ├── manage.py
-└── requirements.txt
-```
+├── gator_library/             # Project Configuration
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py
+│   ├── urls.py
+│   └── wsgi.py
+└── library/                   # Main App Directory
+    ├── migrations/
+    ├── templates/
+    │   └── library/          # Template Files
+    │       ├── base.html
+    │       ├── book_list.html
+    │       ├── book_detail.html
+    │       ├── book_form.html
+    │       ├── book_confirm_delete.html
+    │       ├── color_flip_count.html
+    │       └── login.html
+    ├── data_structures/      # Custom Data Structures
+    │   ├── __init__.py
+    │   ├── rb_tree.py       # Red-Black Tree Implementation
+    │   └── min_heap.py      # Min Heap Implementation
+    ├── __init__.py
+    ├── admin.py
+    ├── apps.py
+    ├── forms.py
+    ├── managers.py
+    ├── models.py
+    ├── signals.py
+    ├── urls.py
+    └── views.py
 
 ## Testing
 
